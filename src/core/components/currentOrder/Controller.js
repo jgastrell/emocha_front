@@ -48,7 +48,6 @@ class Controller extends React.Component {
   
   submitOrder = async () => {
     const { createOrder, currentOrder, setBadgeCounter, setCurrentOrder } = this.props;
-    console.log('this.props', this.props);
     await createOrder({
       variables: {
         widgets: currentOrder

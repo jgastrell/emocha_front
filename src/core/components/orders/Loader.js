@@ -8,5 +8,5 @@ const Loader = props => {
 };
 
 export default compose(
-  graphql(ORDERS),
+  graphql(ORDERS, { options: { pollInterval: 5000 }}),
 )(Loader);
