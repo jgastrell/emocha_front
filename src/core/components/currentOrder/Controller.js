@@ -1,6 +1,5 @@
 import React from 'react';
-import { Table, Button, Spin } from 'antd';
-import ORDER from '../../graphql/queries/ORDERS';
+import { Table, Button, Spin, message } from 'antd';
 
 const columns = [
   {
@@ -48,19 +47,17 @@ class Controller extends React.Component {
   
   submitOrder = async () => {
     const { createOrder, currentOrder, setBadgeCounter, setCurrentOrder } = this.props;
+    if (currentOrder.length === 0)  return message.error('No widgets added to order');
     await createOrder({
       variables: {
         widgets: currentOrder
       },
-      refetchQueries:[{ query: ORDER }]
     });
     setBadgeCounter(0);
     setCurrentOrder([]);
   };  
 
   render () {
-    const { data: { loading }} = this.props;
-    if (loading) return <Spin size='large'style={{marginTop: '150px', marginLeft:'450px'}}/>;
     return (
       <div>
         <Table columns={columns} dataSource={this.getTableData()} pagination={false} />
