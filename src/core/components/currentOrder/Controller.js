@@ -33,6 +33,7 @@ class Controller extends React.Component {
 
   getTableData = () => {
     const { currentOrder } = this.props;
+    console.log('currentOrder',currentOrder)
     return currentOrder.map((widget, index) => {
         const { id, type, size, color, quantity } = widget;
         return {
@@ -55,6 +56,7 @@ class Controller extends React.Component {
     });
     setBadgeCounter(0);
     setCurrentOrder([]);
+    message.success('Order dispatched!');
   };  
 
   render () {
