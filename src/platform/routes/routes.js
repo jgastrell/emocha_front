@@ -5,7 +5,7 @@ import Orders from '../../core/components/orders';
 import Widgets from '../../core/components/widgets';
 import CurrentOrder from '../../core/components/currentOrder';
 // Layout import
-import MainLayout from '../shared/layout';
+import MainLayout from '../components/layout';
 
 const PrivateRoutes = props => {
   const [badgeCounter, setBadgeCounter] = useState(0);

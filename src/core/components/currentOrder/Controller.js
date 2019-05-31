@@ -33,7 +33,6 @@ class Controller extends React.Component {
 
   getTableData = () => {
     const { currentOrder } = this.props;
-    console.log('currentOrder',currentOrder)
     return currentOrder.map((widget, index) => {
         const { id, type, size, color, quantity } = widget;
         return {

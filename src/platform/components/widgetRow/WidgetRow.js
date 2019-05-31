@@ -5,7 +5,7 @@ const Option = Select.Option;
 const FormItem = Form.Item;
 
 
-const FormRow = ({ 
+const WidgetRow = ({ 
     widget,
     updateBadge,
     addWidgetToOrder,
@@ -106,5 +106,5 @@ const FormRow = ({
   )
 };
 
-export default Form.create()(FormRow);
+export default Form.create()(WidgetRow);
 

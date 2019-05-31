@@ -1,7 +1,6 @@
 import React from 'react';
 import { Spin } from 'antd';
-import MyForm from '../../../platform/shared/formRow';
-import FormHeader from '../../../platform/shared/formHeader';
+import WidgetContainer  from '../../../platform/components/widgetContainer';
 
 class Controller extends React.Component {
 
@@ -58,18 +57,13 @@ class Controller extends React.Component {
     const { data: { widgets, loading }} = this.props;
     if (loading) return <Spin size='large'style={{marginTop: '150px', marginLeft:'450px'}}/>;
     return (
-      <div>
-        <FormHeader />
-        {widgets.map((widget, index) => <MyForm
-                                          onSubmit={this.onSubmit}
-                                          widget={widget}
-                                          key={index}
-                                          addWidgetToOrder={this.addWidgetToOrder}
-                                          updateBadge={this.updateBadge}
-                                          validateQuantities={this.validateQuantities}
-                                        />
-        )}
-      </div>
+      <WidgetContainer 
+        onSubmit={this.onSubmit}
+        widgets={widgets}
+        addWidgetToOrder={this.addWidgetToOrder}
+        updateBadge={this.updateBadge}
+        validateQuantities={this.validateQuantities}
+      />
     );
   }
 

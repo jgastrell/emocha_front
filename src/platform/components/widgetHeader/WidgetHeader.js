@@ -14,7 +14,7 @@ const rowStyle = {
   marginBottom: '10px'
 };
 
-const FormHeader = () => {
+const WidgetHeader = () => {
   return (
     <Row gutter={24} type="flex" style={rowStyle}>
       <Col span={5}><span style={style}>Type</span></Col>
@@ -26,4 +26,4 @@ const FormHeader = () => {
   );
 };
 
-export default FormHeader;  
+export default WidgetHeader;  
