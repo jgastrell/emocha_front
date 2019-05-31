@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Spin, message } from 'antd';
+import { Table, Button, message } from 'antd';
 
 const columns = [
   {

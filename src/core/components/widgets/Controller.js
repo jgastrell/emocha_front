@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Spin, Button, Select } from 'antd';
+import { Table, Spin, Button, Select, message } from 'antd';
 
 const Option = Select.Option;
 
@@ -116,6 +116,10 @@ class Controller extends React.Component {
               const { key, type } = record;
               const { tableState } = this.state;
               const row = tableState.filter(elem => elem.id === key).pop();
+              if (row === undefined) return message.error('You are missing one or more fields');
+              if (Object.keys(row).length !==4) return message.error('You are missing one or more fields');
+              let errors = this.validateQuantities(row);
+              if (errors.length > 0) return message.error(errors.pop())
               this.addWidgetToOrder({ ...row, type });
               this.updateBadge();
             }}
@@ -126,6 +130,31 @@ class Controller extends React.Component {
       ),
     },
   ];
+
+  validateQuantities = (row) => {
+    const { currentOrder, data: { widgets }} = this.props, { id, quantity } = row, error = [];
+    let totalQuantities = {};
+
+    for (let widget of widgets) { // calculate total of widget per id
+      const { id, quantity } = widget;
+      totalQuantities[id] = quantity;
+    };
+    for (let order of currentOrder) { // substract from totals the amount from current order
+      const { id, quantity } = order;
+      totalQuantities[id] = totalQuantities[id] - quantity;
+    };
+    totalQuantities[id] = totalQuantities[id] - quantity; // substract from totals the amount selected
+    Object.keys(totalQuantities).map(key => {
+      if (totalQuantities[key] < 0) {
+        const widget = widgets.find(widget => widget.id === key);
+        const { type }  = widget;
+        let msg = `No more widget of type ${type}`
+        error.push(msg)
+      }
+      return true;
+    });
+    return error;
+  };
 
   updateBadge = () => {
     const { badgeCounter, setBadgeCounter } = this.props;
